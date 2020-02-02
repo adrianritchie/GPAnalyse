@@ -12,7 +12,7 @@ keep_going = True
 next_link = ''
 stop_at = ''
 
-p = Path('articles.csv')
+p = Path('data/articles.csv')
 if p.is_file():
     with p.open('r') as r:
         line = r.readline()
@@ -43,17 +43,17 @@ def add_to_data(articles):
 
 def write_and_merge():
     print(p.name)
-    if list.count(data) == 0:
+    if len(data) == 0:
         return
 
     if p.is_file():
-        p.rename('articles.bak')
+        p.rename('data/articles.bak')
 
     with p.open('w') as csvFile:
         writer = csv.writer(csvFile)
         writer.writerows(data)
 
-        b = Path('articles.bak')
+        b = Path('data/articles.bak')
         if b.is_file():
             with b.open('r') as rf:
                 csvFile.writelines(rf.readlines())
